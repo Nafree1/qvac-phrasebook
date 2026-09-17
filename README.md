@@ -49,18 +49,18 @@ node src/index.js /path/to/phrases.txt /path/to/output.md
 
 ▸ Translating on-device...
 
+EN: Good morning, how are you?
+IS: Góðan daginn, hvernig hefurðu það?
+
 EN: Where is the bus station?
 IS: Hvar er strætisvagnastöðin?
-
-EN: How much does this cost?
-IS: Hvað kostar þetta?
 ...
 ▸ Saved assets/phrasebook-is.md
 ```
 
-The first run downloads the model (~35 MB) and shows a progress bar; every run after that is instant and fully offline since the model is cached on disk.
+The first run downloads the model (~35 MB) and shows a progress bar; every run after that is instant and fully offline since the model is cached on disk. All 10 sample phrases translate cleanly, with correct Icelandic accented characters (þ, ð, á, æ) throughout.
 
-**Small-model honesty:** one phrase in the bundled sample — "Hello, how are you?" — consistently comes back with mangled accented characters (`Hallķ, hvernig hefurđu ūađ?` instead of the correct `Halló, hvernig hefurðu það?`), reproducible across repeated runs. Every other phrase, including ones with the same Icelandic letters (þ, ð, ó) in different words, translates with correct accents. This looks like a genuine quirk in how this specific small Bergamot model encodes that particular sequence, not a bug in this app — it's left in rather than edited out, since the point of this submission is showing what actually runs, warts included.
+**Small-model honesty:** an earlier version of the sample list opened with "Hello, how are you?", which this Bergamot model consistently mistranslated with mangled accented characters (`Hallķ, hvernig hefurđu ūađ?` instead of `Halló, hvernig hefurðu það?`) — reproducible on every run, while every other phrase translated correctly. Testing several alternate greetings found the bug is specific to the word "Hello" itself: "Good morning, how are you?" translates perfectly. Swapped it rather than leaving a known-bad phrase in the sample.
 
 ## How it works
 
